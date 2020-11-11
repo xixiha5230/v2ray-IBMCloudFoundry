@@ -40,7 +40,7 @@ if __name__ == '__main__':
     data["outbounds"] = [protocol]
 
     with open("a.json", "wb") as fjs:
-        json.dumps(data, fjs)
+        json.dump(data, fjs)
         fjs.close
         
     args = ("./app", "-c", "a.json")
