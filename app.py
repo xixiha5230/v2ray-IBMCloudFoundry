@@ -39,10 +39,8 @@ if __name__ == '__main__':
     data["inbounds"] = [inbounds]
     data["outbounds"] = [protocol]
 
-    json_data = json.dumps(data)
-    print(json_data)
     with open("a.json", "wb") as fjs:
-        fjs.write(json_data)
+        json.dumps(data, fjs)
         fjs.close
         
     args = ("./app", "-c", "a.json")
