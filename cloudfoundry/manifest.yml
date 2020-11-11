@@ -1,5 +1,0 @@
-applications:
-- path: .
-  name: MyWeb
-  random-route: true
-  memory: 128M
