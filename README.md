@@ -1,3 +1,3 @@
 # IBMProject
 
-``wget https://github.com/xixiha5230/IBMCloudFoundry/edit/master/install.sh``
+``wget https://raw.githubusercontent.com/xixiha5230/IBMCloudFoundry/master/install.sh``
