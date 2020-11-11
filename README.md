@@ -8,4 +8,13 @@
 
 4. edit name in ``manifest.yml``
 
-5. deploy to IBM cloud
+5. deploy to IBM cloud      
+``
+ibmcloud target --cf    
+``
+``
+echo "N"|ibmcloud cf install  
+``
+``
+ibmcloud cf push  
+``
