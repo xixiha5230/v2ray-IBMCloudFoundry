@@ -26,7 +26,7 @@ if __name__ == '__main__':
     streamSettings = {}
     streamSettings["network"] = "ws"
     path={}
-    path["path"] = "/"
+    path["path"] = PATH
     streamSettings["wsSettings"] = path
     inbounds["port"] = 8080
     inbounds["protocol"] = "vmess"
@@ -39,10 +39,22 @@ if __name__ == '__main__':
     data["inbounds"] = [inbounds]
     data["outbounds"] = [protocol]
 
-    with open("a.json", "wb") as fjs:
+    with open("a.json", "w") as fjs:
         json.dump(data, fjs)
         fjs.close
-        
+    
+    args = ("chmod", "+x", "a.json")
+    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+    popen.wait()
+    output = popen.stdout.read()
+    print(output)
+
+    args = ("chmod", "+x", "app")
+    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+    popen.wait()
+    output = popen.stdout.read()
+    print(output)
+
     args = ("./app", "-c", "a.json")
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()
