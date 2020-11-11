@@ -60,7 +60,7 @@ EOF
 clone_repo(){
     echo "进行初始化。。。"
     rm -rf IBMCloudFoundry
-    git clone -b test https://github.com/xixiha5230/IBMCloudFoundry
+    git clone https://github.com/xixiha5230/IBMCloudFoundry.git
     cd IBMCloudFoundry/cloudfoundry/web
     chmod 0755 ./*
     cd ${SH_PATH}/IBMCloudFoundry/cloudfoundry
