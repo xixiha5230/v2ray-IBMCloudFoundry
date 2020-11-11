@@ -22,6 +22,6 @@ if __name__ == '__main__':
     args = ("python", "a.py")
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     output = popen.stdout.read()
-    print output
+    print(output)
     print("ok")
 

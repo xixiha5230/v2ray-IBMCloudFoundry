@@ -1,6 +1,8 @@
 FROM python:2-alpine
 
 COPY ./requirements.txt /app/requirements.txt
+COPY ./app.py /app/app.py
+COPY ./source.py /app/source.py
 
 WORKDIR /app
 
