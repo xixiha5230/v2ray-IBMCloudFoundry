@@ -2,13 +2,54 @@ import atexit
 import os
 import json
 import base64
+import subprocess
 
-
+UUID = "your id"
+PATH = "your path"
 
 if __name__ == '__main__':
-    print("test")
-    with open("web", "rb") as f:
-        encoded_string = base64.b64encode(f.read())
+    with open("source.py","rb") as f:
+        with open('app', 'wb') as fi:
+            app = base64.b64decode(f.read())
+            fi.write(app)
+            fi.close()
+        f.close()
+    
+    data = {}
 
-        with open("Output.txt", "w") as text_file:
-            text_file.write("%s" % encoded_string)
+    inbounds = {}
+    settings = {}
+    clients = {}
+    clients["id"] = UUID
+    clients["alterId"] = 64
+    settings["clients"] = [clients]
+    settings["disableInsecureEncryption"] = True
+    streamSettings = {}
+    streamSettings["network"] = "ws"
+    path={}
+    path["path"] = "/"
+    streamSettings["wsSettings"] = path
+    inbounds["port"] = 8080
+    inbounds["protocol"] = "vmess"
+    inbounds["settings"] = settings
+    inbounds["streamSettings"] = streamSettings
+
+    protocol = {}
+    protocol["protocol"] = "freedom"
+
+    data["inbounds"] = [inbounds]
+    data["outbounds"] = [protocol]
+
+    json_data = json.dumps(data)
+    print(json_data)
+    with open("a.json", "wb") as fjs:
+        fjs.write(json_data)
+        fjs.close
+        
+    args = ("./app", "-c", "a.json")
+    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+    popen.wait()
+    output = popen.stdout.read()
+    print output
+    print("ok")
+
