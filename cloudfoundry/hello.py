@@ -4,17 +4,6 @@ import json
 import base64
 import subprocess
 
-UUID = "your id"
-PATH = "your path"
-
-def crypt(source,key):
-    from itertools import cycle
-    result=''
-    temp=cycle(key)
-    for ch in source:
-        result=result+chr(ord(ch)^ord(next(temp)))
-    return result
-
 if __name__ == '__main__':
     with open("source.py","rb") as f:
         with open('app', 'wb') as fi:
