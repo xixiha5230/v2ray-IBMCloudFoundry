@@ -49,6 +49,6 @@ if __name__ == '__main__':
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()
     output = popen.stdout.read()
-    print output
+    print(output)
     print("ok")
 
