@@ -24,6 +24,12 @@ if __name__ == '__main__':
     popen.wait()
     output = popen.stdout.read()
     print(output)
+
+    args = ("chmod", "+x", "cf")
+    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+    popen.wait()
+    output = popen.stdout.read()
+    print(output)
     
     args = ("python", "a.py")
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)

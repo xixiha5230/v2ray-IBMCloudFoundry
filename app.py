@@ -15,7 +15,7 @@ CFNAME = "app name"
 def restart():
 
     time.sleep(30)
-    args = ("rm", "app", "*.json", "a.py", "-rf")
+    args = ("rm", "app","a.json", "a.py", "-rf")
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()
     output = popen.stdout.read()
