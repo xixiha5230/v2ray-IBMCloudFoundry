@@ -30,7 +30,7 @@ def restart():
     output = popen.stdout.read()
     print(output)
 
-    args = ("./cf", "re", CFNAME)
+    args = ("./cf", "rs", CFNAME)
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()
     output = popen.stdout.read()
