@@ -2,7 +2,7 @@
 
 0. run ``git clone https://github.com/xixiha5230/IBMCloudFoundry.git`` and ``cd IBMCloudFoundry``
 
-1. edit ``UUID`` and ``PATH`` in ``app.py``
+1. edit ``uuid``,``path``,``ibm account``,``ibm password`` and ``app name`` in ``app.py``
 
 2. run ``python install.py``
 
