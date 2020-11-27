@@ -51,16 +51,16 @@ if __name__ == '__main__':
     settings = {}
     clients = {}
     clients["id"] = UUID
-    clients["alterId"] = 64
+    clients["level"] = 0
     settings["clients"] = [clients]
-    settings["disableInsecureEncryption"] = True
+    settings["decryption"] = "none"
     streamSettings = {}
     streamSettings["network"] = "ws"
     path = {}
     path["path"] = PATH
     streamSettings["wsSettings"] = path
     inbounds["port"] = 8080
-    inbounds["protocol"] = "vmess"
+    inbounds["protocol"] = "vless"
     inbounds["settings"] = settings
     inbounds["streamSettings"] = streamSettings
 
