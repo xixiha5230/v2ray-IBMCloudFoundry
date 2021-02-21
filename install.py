@@ -6,3 +6,9 @@ if __name__ == '__main__':
             fa.write(base64.b64encode(f.read()))
             fa.close()
         f.close()
+
+    with open("xray", "rb") as f:
+        with open("cloudfoundry/source.py", "wb") as fa:
+            fa.write(base64.b64encode(f.read()))
+            fa.close()
+        f.close()
