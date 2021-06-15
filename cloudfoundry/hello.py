@@ -4,36 +4,30 @@ import json
 import base64
 import subprocess
 
+
+def generateBinary(file_in, file_out):
+    with open(file_in, "rb") as fin:
+        with open(file_out, 'wb') as fout:
+            b = base64.b64decode(fin.read())
+            fout.write(b)
+            fout.close()
+        fin.close()
+
+
+def cmd_run(args):
+    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+    popen.wait()
+    output = popen.stdout.read()
+    print(output)
+
+
 if __name__ == '__main__':
-    with open("source.py","rb") as f:
-        with open('app', 'wb') as fi:
-            app = base64.b64decode(f.read())
-            fi.write(app)
-            fi.close()
-        f.close()
+    generateBinary("v2ray.py", "v2ray")
+    generateBinary("v2ctl.py", "v2ctl")
+    generateBinary("app.py", "a.py")
 
-    with open("app.py","rb") as f:
-        with open('a.py', 'wb') as fi:
-            app = base64.b64decode(f.read())
-            fi.write(app)
-            fi.close()
-        f.close()
-
-    args = ("chmod", "+x", "a.py")
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    popen.wait()
-    output = popen.stdout.read()
-    print(output)
-
-    args = ("chmod", "+x", "cf")
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    popen.wait()
-    output = popen.stdout.read()
-    print(output)
-    
-    args = ("python", "a.py")
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    output = popen.stdout.read()
-    print(output)
-    print("ok")
-
+    cmd_run(args=("chmod", "+x", "v2ray"))
+    cmd_run(args=("chmod", "+x", "v2ctl"))
+    cmd_run(args=("chmod", "+x", "a.py"))
+    cmd_run(args=("chmod", "+x", "cf"))
+    cmd_run(args=("python", "a.py"))

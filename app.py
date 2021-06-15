@@ -12,41 +12,26 @@ IBMPASS = "password"
 CFNAME = "app name"
 
 
-def restart():
-
-    time.sleep(30)
-    args = ("rm", "app","a.json", "a.py", "-rf")
+def cmd_run(args):
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()
     output = popen.stdout.read()
     print(output)
+
+
+def restart():
+    time.sleep(30)
+    cmd_run(args=("rm", "app", "a.json", "a.py", "-rf"))
 
     time.sleep(60*60*24*4)
 
-    args = ("./cf", "l", "-a", "https://api.us-south.cf.cloud.ibm.com",
-            "login", "-u", IBMEMAIL, "-p", IBMPASS)
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    popen.wait()
-    output = popen.stdout.read()
-    print(output)
-
-    args = ("./cf", "rs", CFNAME)
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    popen.wait()
-    output = popen.stdout.read()
-    print(output)
+    cmd_run(args=("./cf", "l", "-a", "https://api.us-south.cf.cloud.ibm.com",
+                  "login", "-u", IBMEMAIL, "-p", IBMPASS))
+    cmd_run(args=("./cf", "rs", CFNAME))
 
 
 if __name__ == '__main__':
-    with open("source.py", "rb") as f:
-        with open('app', 'wb') as fi:
-            app = base64.b64decode(f.read())
-            fi.write(app)
-            fi.close()
-        f.close()
-
     data = {}
-
     inbounds = {}
     settings = {}
     clients = {}
@@ -63,33 +48,14 @@ if __name__ == '__main__':
     inbounds["protocol"] = "vless"
     inbounds["settings"] = settings
     inbounds["streamSettings"] = streamSettings
-
     protocol = {}
     protocol["protocol"] = "freedom"
-
     data["inbounds"] = [inbounds]
     data["outbounds"] = [protocol]
+    with open("config.json", "w") as f:
+        json.dump(data, f)
+        f.close
 
-    with open("a.json", "w") as fjs:
-        json.dump(data, fjs)
-        fjs.close
-    args = ("chmod", "+x", "a.json")
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    popen.wait()
-    output = popen.stdout.read()
-    print(output)
-
-    args = ("chmod", "+x", "app")
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    popen.wait()
-    output = popen.stdout.read()
-    print(output)
-
+    cmd_run(args=("chmod", "+x", "config.json"))
+    cmd_run(args=("./v2ray", "-c", "config.json"))
     thread.start_new_thread(restart, ())
-
-    args = ("./app", "-c", "a.json")
-    popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-    popen.wait()
-    output = popen.stdout.read()
-    print(output)
-    print("ok")

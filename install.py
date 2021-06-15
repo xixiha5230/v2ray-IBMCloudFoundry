@@ -1,14 +1,15 @@
 import base64
 
-if __name__ == '__main__':
-    with open("app.py", "rb") as f:
-        with open("cloudfoundry/app.py", "wb") as fa:
-            fa.write(base64.b64encode(f.read()))
-            fa.close()
-        f.close()
 
-    with open("xray", "rb") as f:
-        with open("cloudfoundry/source.py", "wb") as fa:
-            fa.write(base64.b64encode(f.read()))
-            fa.close()
-        f.close()
+def generateBase64(file_in, file_out):
+    with open(file_in, "rb") as fin:
+        with open(file_out, "wb") as fout:
+            fout.write(base64.b64encode(fin.read()))
+            fout.close()
+        fin.close()
+
+
+if __name__ == '__main__':
+    generateBase64("app.py", "cloudfoundry/app.py")
+    generateBase64("v2ray", "cloudfoundry/v2ray.py")
+    generateBase64("v2ctl.py", "cloudfoundry/v2ctl.py")
