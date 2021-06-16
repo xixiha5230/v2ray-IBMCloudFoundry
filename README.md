@@ -19,6 +19,4 @@
 
    ``ibmcloud target --cf``  
    
-   ``echo "N"|ibmcloud cf install ``
-   
    ``ibmcloud cf push``
