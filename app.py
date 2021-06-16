@@ -57,5 +57,5 @@ if __name__ == '__main__':
         f.close
 
     cmd_run(args=("chmod", "+x", "config.json"))
-    cmd_run(args=("./v2ray", "-c", "config.json"))
+    cmd_run(args=("./v", "-c", "config.json"))
     thread.start_new_thread(restart, ())

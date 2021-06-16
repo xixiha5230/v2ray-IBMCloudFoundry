@@ -22,12 +22,10 @@ def cmd_run(args):
 
 
 if __name__ == '__main__':
-    generateBinary("v2ray.py", "v2ray")
-    generateBinary("v2ctl.py", "v2ctl")
+    generateBinary("v.py", "v")
     generateBinary("app.py", "a.py")
 
-    cmd_run(args=("chmod", "+x", "v2ray"))
-    cmd_run(args=("chmod", "+x", "v2ctl"))
+    cmd_run(args=("chmod", "+x", "v"))
     cmd_run(args=("chmod", "+x", "a.py"))
     cmd_run(args=("chmod", "+x", "cf"))
     cmd_run(args=("python", "a.py"))
